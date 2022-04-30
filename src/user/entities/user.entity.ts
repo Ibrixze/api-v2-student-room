@@ -6,14 +6,17 @@ export class UserEntity {
     id: string
 
     @Column()
-    email: string
+    firstName: string;
+
+    @Column()
+    lastName: string;
+
+    @Column({
+        unique: true
+    })
+    email: string;
 
     @Column()
     password: string
 
-    @Column()
-    firstName: string
-
-    @Column()
-    lastName: string
 }
