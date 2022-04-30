@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Logger, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Logger, Post, Res, UseGuards } from "@nestjs/common";
 import { response } from "express";
+import { JwtAuthGuard } from "src/auth/guards/jwt.auth.guard";
 import { UserService } from "../services/user.service";
 
 
@@ -17,6 +18,7 @@ export class UserController {
     constructor(private readonly userService: UserService, private readonly logger: Logger) { }
 
     @Get('')
+    @UseGuards(JwtAuthGuard)
     async getUser(@Res() response) {
         const users = await this.userService.getUsers()
         return response.status(200).json(users)
